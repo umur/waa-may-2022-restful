@@ -64,7 +64,9 @@ public class StudentController {
     public ResponseEntity<?> addCourse(@PathVariable long id, @RequestBody Course course){
         Optional<Student> student = Optional.ofNullable(studentService.getStudent(id));
         if(student.isPresent())
-            return new ResponseEntity<>(studentService.addCourse(id, course), HttpStatus.CREATED);
+            return new ResponseEntity<>(
+                    StudentAdapter.getStudentV1(studentService.addCourse(id, course)),
+                    HttpStatus.CREATED);
         return new ResponseEntity<>(new CustomError("Student Not Found"), HttpStatus.NOT_FOUND);
     }
 

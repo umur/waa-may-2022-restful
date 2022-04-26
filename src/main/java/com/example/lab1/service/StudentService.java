@@ -42,4 +42,13 @@ public class StudentService {
         student.ifPresent(value -> value.addCourse(course));
         return student.get();
     }
+
+    public Collection<Student> getStudentsByMajor(String major) {
+        return studentRepository.getStudentsByMajor(major);
+    }
+
+    public Collection<Course> getCoursesByStudentId(long id) {
+        Optional<Student> student = Optional.ofNullable(studentRepository.getStudent(id));
+        return student.<Collection<Course>>map(Student::getCoursesTaken).orElse(null);
+    }
 }

@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepository {
@@ -32,5 +33,13 @@ public class StudentRepository {
 
     public void deleteStudent(long id) {
         students.remove(id);
+    }
+
+    public Collection<Student> getStudentsByMajor(String major) {
+        return students
+                .values()
+                .stream()
+                .filter(student -> student.getMajor().equals(major))
+                .collect(Collectors.toList());
     }
 }
