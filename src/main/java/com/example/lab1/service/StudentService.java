@@ -5,6 +5,7 @@ import com.example.lab1.domain.Student;
 import com.example.lab1.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> getStudents(){
+    public Collection<Student> getStudents(){
         return studentRepository.getStudents();
     }
 

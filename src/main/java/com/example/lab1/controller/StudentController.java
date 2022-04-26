@@ -1,5 +1,6 @@
 package com.example.lab1.controller;
 
+import com.example.lab1.customError.CustomError;
 import com.example.lab1.domain.Course;
 import com.example.lab1.domain.Student;
 import com.example.lab1.service.StudentService;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,9 +25,9 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<?> getStudents(@RequestParam Map<String, String> queryParams){
-        Optional<List<Student>> studentList = Optional.ofNullable(studentService.getStudents());
-        if(studentList.isPresent())
-           return new ResponseEntity<>(studentList, HttpStatus.OK);
+        Optional<Collection<Student>> students = Optional.ofNullable(studentService.getStudents());
+        if(students.isPresent())
+           return new ResponseEntity<>(students, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -56,7 +58,10 @@ public class StudentController {
 
     @PostMapping("/{id}/courses")
     public ResponseEntity<?> addCourse(@PathVariable long id, @RequestBody Course course){
-        return new ResponseEntity<>(studentService.addCourse(id, course), HttpStatus.CREATED);
+        Optional<Student> student = Optional.ofNullable(studentService.getStudent(id));
+        if(student.isPresent())
+            return new ResponseEntity<>(studentService.addCourse(id, course), HttpStatus.CREATED);
+        return new ResponseEntity<>(new CustomError("Student Not Found"), HttpStatus.NOT_FOUND);
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.lab1.repository;
 import com.example.lab1.domain.Student;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,8 @@ import java.util.Map;
 public class StudentRepository {
     Map<Long, Student> students = new HashMap<>();
 
-    public List<Student> getStudents() {
-        return (List<Student>) students.values();
+    public Collection<Student> getStudents() {
+        return students.values();
     }
 
     public Student getStudent(long id) {
@@ -26,7 +27,7 @@ public class StudentRepository {
 
     public void modifyStudent(long id, Student student) {
         students.remove(id);
-        students.put(id, student);
+        students.put(student.getId(), student);
     }
 
     public void deleteStudent(long id) {
