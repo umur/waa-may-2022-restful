@@ -10,4 +10,5 @@ public interface StudentService {
     void delete(int id);
     List<Student> getAll();
     Student getById(int id);
+    List<Student> getStudentsByMajor(String major);
 }

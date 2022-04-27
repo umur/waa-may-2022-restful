@@ -30,4 +30,9 @@ public class StudentServiceImpl implements StudentService {
     public Student getById(int id) {
         return studentRepo.getById(id);
     }
+
+    @Override
+    public List<Student> getStudentsByMajor(String major) {
+        return studentRepo.getStudentsByMajor(major);
+    }
 }

@@ -35,6 +35,11 @@ public class StudentController {
         studentService.save(s);
     }
 
+    @GetMapping(value = "api/v2/students/{major}")
+    public List<Student> getStudentsByMajor(@PathVariable String major) {
+        return studentService.getStudentsByMajor(major);
+    }
+
 //    @PutMapping("/{id}")
 //    public void update(@RequestBody Student s, @PathVariable int id) {
 //        studentService.update(s, id);

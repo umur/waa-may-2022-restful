@@ -50,4 +50,10 @@ public class StudentRepo {
     public List<Student> getAll() {
         return students;
     }
+
+    public List<Student> getStudentsByMajor(String major) {
+        return students.stream()
+                .filter( s -> s.getMajor() == major)
+                .collect(Collectors.toList());
+    }
 }
