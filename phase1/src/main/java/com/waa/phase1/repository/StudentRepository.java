@@ -1,17 +1,17 @@
 package com.waa.phase1.repository;
 
-import com.waa.phase1.domain.Course;
 import com.waa.phase1.domain.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepository {
-    private static List<Student> students = new ArrayList<>();
+    private static final List<Student> students = new ArrayList<>();
 
     public List<Student> getAll() {
         return students;
@@ -19,8 +19,8 @@ public class StudentRepository {
 
     public void save(Student s) {
         var notExists = students.stream()
-                        .filter(l -> l.getId() == s.getId())
-                                .noneMatch(l -> l.getId() == s.getId());
+                .filter(l -> Objects.equals(l.getId(), s.getId()))
+                .noneMatch(l -> Objects.equals(l.getId(), s.getId()));
         if (notExists) {
             students.add(s);
         }
@@ -28,13 +28,13 @@ public class StudentRepository {
 
     public void delete(Long id) {
         students.stream()
-                .filter(student -> student.getId() == id)
-                .forEach(l -> students.remove(l));
+                .filter(student -> Objects.equals(student.getId(), id))
+                .forEach(students::remove);
     }
 
     public Student getById(Long id) {
         return students.stream()
-                .filter(l -> l.getId() == id)
+                .filter(l -> Objects.equals(l.getId(), id))
                 .findFirst()
                 .orElse(null);
     }
@@ -56,21 +56,19 @@ public class StudentRepository {
                 .collect(Collectors.toList());
     }
 
-    public List<Course> getCoursesByStudentId(Long studentId) {
+    public List<Long> getCoursesByStudentId(Long studentId) {
         return students.stream()
-                .filter(l -> l.getId() == studentId)
+                .filter(l -> Objects.equals(l.getId(), studentId))
                 .findFirst()
-                .map(s -> s.getCoursesTaken())
+                .map(Student::getCoursesTaken)
                 .orElse(Collections.emptyList());
     }
 
-    public void addCourse(Long id, Course c) {
-        var student = students.stream()
-                .filter(s -> s.getId() == id)
-                .findFirst()
-                .orElse(null);
-        if (student != null) {
-            student.getCoursesTaken().add(c);
-        }
+    public void addCourse(Long id, Long courseId) {
+        students.stream()
+                .filter(s -> Objects.equals(s.getId(), id))
+                .findFirst().ifPresent(student -> {
+                    student.getCoursesTaken().add(courseId);
+                });
     }
 }

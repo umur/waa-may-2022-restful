@@ -16,7 +16,7 @@ public interface StudentService {
 
     void update(Long id, Student s);
 
-    void addCourse(Long id, Course c);
+    void addCourse(Long id, Long courseId);
 
     List<Student> getByMajor(String major);
 

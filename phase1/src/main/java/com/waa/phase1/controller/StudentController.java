@@ -44,13 +44,17 @@ public class StudentController {
 
     @GetMapping("/api/v2/students")
     public List<Student> getStudentsByMajor(@RequestParam String major) {
-        var students = studentService.getByMajor(major);
-        return students;
+        return studentService.getByMajor(major);
     }
 
     @GetMapping("/api/v2/students/{id}/courses")
-    public List<Course> getCoursesByStudentId(@PathVariable Long studentId) {
-        var courses = studentService.getCourseByStudentId(studentId);
-        return courses;
+    public List<Course> getCoursesByStudentId(@PathVariable Long id) {
+        return studentService.getCourseByStudentId(id);
+    }
+
+    @PostMapping("/api/v2/students/{id}/courses")
+    public ResponseEntity<Student> addStudentCourse(@PathVariable Long id, @RequestBody Course c) {
+        studentService.addCourse(id, c.getId());
+        return ResponseEntity.ok(studentService.getById(id));
     }
 }
