@@ -23,6 +23,8 @@ public class Student {
 
     private List<Course> coursesTaken;
 
+    private boolean deleted;
+
     public Student(Long id, String firstName, String lastName, String email, String major){
         this.id = id;
         this.firstName = firstName;

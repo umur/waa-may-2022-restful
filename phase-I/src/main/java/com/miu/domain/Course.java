@@ -12,4 +12,12 @@ public class Course {
     private String name;
 
     private String code;
+
+    private boolean deleted;
+
+    public Course(Long id, String name, String code) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+    }
 }

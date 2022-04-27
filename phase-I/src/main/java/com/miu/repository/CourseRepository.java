@@ -1,7 +1,6 @@
 package com.miu.repository;
 
 import com.miu.domain.Course;
-import com.miu.domain.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -37,9 +36,12 @@ public class CourseRepository {
     }
 
     public void delete(Long id){
-        var mayBeStudent = courses.stream().filter(stu -> stu.getId().equals(id)).findFirst();
-        if(mayBeStudent.isPresent()){
-            courses.remove(mayBeStudent.get());
+        var mayBeCourse = courses.stream().filter(stu -> stu.getId().equals(id)).findFirst();
+        if(mayBeCourse.isPresent()){
+            courses.remove(mayBeCourse.get());
+            var course = mayBeCourse.get();
+            course.setDeleted(true);
+            courses.add(course);
         }
     }
 

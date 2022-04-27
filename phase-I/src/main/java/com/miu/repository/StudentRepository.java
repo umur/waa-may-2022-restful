@@ -41,6 +41,9 @@ public class StudentRepository {
         var mayBeStudent = students.stream().filter(stu -> stu.getId().equals(id)).findFirst();
         if(mayBeStudent.isPresent()){
             students.remove(mayBeStudent.get());
+            var student = mayBeStudent.get();
+            student.setDeleted(true);
+            students.add(student);
         }
     }
 
