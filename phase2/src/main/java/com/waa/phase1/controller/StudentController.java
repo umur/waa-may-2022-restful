@@ -57,7 +57,7 @@ public class StudentController {
 
     @PostMapping("/api/v2/students/{id}/courses")
     public ResponseEntity<StudentDto> addStudentCourse(@PathVariable Long id, @RequestBody StudentCourseDto c) {
-        studentService.addCourse(id, c.getCourseId());
+        studentService.addCourse(id, c.getId());
         return ResponseEntity.ok(studentService.getById(id));
     }
 }
