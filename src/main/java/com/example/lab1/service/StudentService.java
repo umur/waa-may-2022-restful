@@ -2,53 +2,25 @@ package com.example.lab1.service;
 
 import com.example.lab1.domain.Course;
 import com.example.lab1.domain.Student;
-import com.example.lab1.repository.StudentRepository;
-import org.springframework.stereotype.Service;
+import com.example.lab1.dtos.StudentDTOV1;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
-@Service
-public class StudentService {
-    private final StudentRepository studentRepository;
+public interface StudentService {
+     Collection<StudentDTOV1> getStudents();
 
-    public StudentService(StudentRepository studentRepository){
-        this.studentRepository = studentRepository;
-    }
+     StudentDTOV1 getStudent(long id);
 
-    public Collection<Student> getStudents(){
-        return studentRepository.getStudents();
-    }
+     StudentDTOV1 createStudent(Student student);
 
-    public Student getStudent(long id){
-        return studentRepository.getStudent(id);
-    }
+     void modifyStudent(long id, Student student);
 
-    public Student createStudent(Student student) {
-        return studentRepository.createStudent(student);
-    }
+     void deleteStudent(long id);
 
-    public void modifyStudent(long id, Student student) {
-        studentRepository.modifyStudent(id, student);
-    }
+     StudentDTOV1 addCourse(long id, Course course);
 
-    public void deleteStudent(long id) {
-        studentRepository.deleteStudent(id);
-    }
+     Collection<StudentDTOV1> getStudentsByMajor(String major);
 
-    public Student addCourse(long id, Course course) {
-        Optional<Student> student = Optional.ofNullable(studentRepository.getStudent(id));
-        student.ifPresent(value -> value.addCourse(course));
-        return student.get();
-    }
-
-    public Collection<Student> getStudentsByMajor(String major) {
-        return studentRepository.getStudentsByMajor(major);
-    }
-
-    public Collection<Course> getCoursesByStudentId(long id) {
-        Optional<Student> student = Optional.ofNullable(studentRepository.getStudent(id));
-        return student.<Collection<Course>>map(Student::getCoursesTaken).orElse(null);
-    }
+     Collection<Course> getCoursesByStudentId(long id);
 }

@@ -3,10 +3,7 @@ package com.example.lab1.repository;
 import com.example.lab1.domain.Student;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
