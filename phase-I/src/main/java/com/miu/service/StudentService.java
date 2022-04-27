@@ -1,5 +1,6 @@
 package com.miu.service;
 
+import com.miu.domain.Course;
 import com.miu.domain.Student;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface StudentService {
     Student update(Student student, Long id);
 
     void remove(Long id);
+
+    List<Student> getStudentsByMajor(String major);
+
+    List<Course> getCoursesByStudentId(Long studentId);
 }

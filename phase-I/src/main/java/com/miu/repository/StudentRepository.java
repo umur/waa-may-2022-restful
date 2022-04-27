@@ -13,10 +13,16 @@ public class StudentRepository {
     private static List<Student> students = new ArrayList<>();
 
     static {
-        Student student = new Student(1L,"shree","krishna","s@gmail.com","compro");
-        student.addCourse(new Course(1L,"WAA","CS-543"));
-        student.addCourse(new Course(2L,"MWA","CS-546"));
-        students.add(student);
+        Student student1 = new Student(1L,"shree","krishna","s@gmail.com","compro");
+        Student student2 = new Student(1L,"ashok sharma","poudel","s@gmail.com","mba");
+        Course waaCourse = new Course(1L,"WAA","CS-543");
+        Course mwaCourse = new Course(2L,"MWA","CS-546");
+        student1.addCourse(waaCourse);
+        student1.addCourse(mwaCourse);
+        student2.addCourse(mwaCourse);
+        student2.addCourse(waaCourse);
+        students.add(student1);
+        students.add(student2);
     }
 
     public List<Student> findAll(){
