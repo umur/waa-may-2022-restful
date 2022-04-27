@@ -5,6 +5,8 @@ public class Course {
     private String name;
     private String code;
 
+    public Course(){}
+
     public Course(int id, String name, String code) {
         this.id = id;
         this.name = name;

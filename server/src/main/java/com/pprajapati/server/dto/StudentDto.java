@@ -1,9 +1,10 @@
-package com.pprajapati.server.domain;
+package com.pprajapati.server.dto;
 
-import java.time.LocalDateTime;
+import com.pprajapati.server.domain.Course;
+
 import java.util.List;
 
-public class Student {
+public class StudentDto {
     private int id;
     private String firstName;
     private String lastName;
@@ -11,21 +12,11 @@ public class Student {
     private String major;
 
     private char gpa;
-
-    private LocalDateTime createdAt;
     private List<Course> coursesTaken;
 
-    public char getGpa() {
-        return gpa;
-    }
+    public StudentDto(){}
 
-    public void setGpa(char gpa) {
-        this.gpa = gpa;
-    }
-
-    public Student(){};
-
-    public Student(int id, String firstName, String lastName, String email, String major, char gpa,  List<Course> coursesTaken) {
+    public StudentDto(int id, String firstName, String lastName, String email, String major, char gpa, List<Course> coursesTaken) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -73,6 +64,14 @@ public class Student {
 
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public char getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(char gpa) {
+        this.gpa = gpa;
     }
 
     public List<Course> getCoursesTaken() {
