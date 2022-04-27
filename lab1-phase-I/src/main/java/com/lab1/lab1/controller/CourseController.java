@@ -11,25 +11,25 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/courses")
+@RequestMapping("/api/")
 public class CourseController {
     private final CourseService courseService;
 
-    @GetMapping("/")
+    @GetMapping("v1/courses")
     public ResponseEntity<List<Course>> getAll(){
         return ResponseEntity.status(200).body(courseService.getAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("v1/courses/{id}")
     public Course getById(@PathVariable int id) {
         return courseService.getById(id);
     }
-    @PostMapping("/")
+    @PostMapping("v1/courses")
     public  void save(@RequestBody Course c) {
         courseService.save(c);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("v1/courses/{id}")
     public void delete(@PathVariable int id) {
         courseService.delete(id);
     }

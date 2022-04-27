@@ -11,39 +11,39 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/students")
+@RequestMapping("/api/")
 public class StudentController {
 
     private final StudentService studentService;
 
-    @GetMapping
+    @GetMapping("v1/students")
     public ResponseEntity<List<StudentDto>> getAll() {
         return ResponseEntity.status(200).body(studentService.getAll());
     }
 
 
 
-    @GetMapping("/{id}")
+    @GetMapping("v1/students/{id}")
     public ResponseEntity<StudentDto> getById(@PathVariable int id) {
         return ResponseEntity.status(200).body(studentService.getById(id));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("v1/students/{id}")
     public void delete(@PathVariable int id) {
         studentService.delete(id);
     }
 
-    @PostMapping(value = "/", consumes = {"*/*"})
+    @PostMapping("v1/students")
     public void save(@RequestBody StudentDto s) {
         studentService.save(s);
     }
 
-    @GetMapping(value = "/api/v2/students/{major}")
+    @GetMapping("v2/students/{major}")
     public List<StudentDto> getStudentsByMajor(@PathVariable String major) {
         return studentService.getStudentsByMajor(major);
     }
 
-    @GetMapping(value = "/api/v2/students/{id}/courses")
+    @GetMapping("v2/students/{id}/courses")
     public List<CourseDto> getCoursesByStudentId(@PathVariable int id) {
         return studentService.getCoursesByStudentId(id);
     }

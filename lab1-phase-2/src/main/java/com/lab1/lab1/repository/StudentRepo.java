@@ -68,7 +68,7 @@ public class StudentRepo {
 
     public List<Student> getStudentsByMajor(String major) {
         return students.stream()
-                .filter( s -> s.getMajor() == major)
+                .filter( s -> s.getMajor().equals(major))
                 .collect(Collectors.toList());
     }
 
