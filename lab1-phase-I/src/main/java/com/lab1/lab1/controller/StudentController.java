@@ -34,7 +34,7 @@ public class StudentController {
     public void save(@RequestBody Student s) {
         studentService.save(s);
     }
-    
+
 //    @PutMapping("/{id}")
 //    public void update(@RequestBody Student s, @PathVariable int id) {
 //        studentService.update(s, id);
