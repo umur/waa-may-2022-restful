@@ -11,9 +11,10 @@ public class CourseRepository {
 
     private static List<Course> courses = new ArrayList<>();
 
+    private static long counter =0;
     static {
-        courses.add(new Course(1L,"WAA","CS-543"));
-        courses.add(new Course(2L,"MWA","CS-546"));
+        courses.add(new Course(++counter,"WAA","CS-543"));
+        courses.add(new Course(++counter,"MWA","CS-546"));
     }
 
     public List<Course> findAll(){
@@ -21,6 +22,7 @@ public class CourseRepository {
     }
 
     public Course save(Course course){
+        course.setId(++counter);
         courses.add(course);
         return course;
     }

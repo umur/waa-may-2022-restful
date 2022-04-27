@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
     <name>restful</name>
     <modules>
-        <module>phasei</module>
+        <module>phase-i</module>
         <module>phaseii</module>
     </modules>
 

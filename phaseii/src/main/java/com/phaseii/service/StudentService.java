@@ -2,6 +2,7 @@ package com.phaseii.service;
 
 import com.phaseii.dto.CourseDto;
 import com.phaseii.dto.StudentDto;
+import com.phaseii.dto.StudentV2Dto;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface StudentService {
 
     void remove(Long id);
 
-    List<StudentDto> getStudentsByMajor(String major);
+    List<StudentV2Dto> getStudentsByMajor(String major);
 
     List<CourseDto> getCoursesByStudentId(Long studentId);
 }

@@ -46,6 +46,15 @@ public class Student {
         this.coursesTaken = coursesTaken;
     }
 
+    public Student(Long id, String firstName, String lastName, String email, String major, List<Course> coursesTaken){
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.major = major;
+        this.coursesTaken = coursesTaken;
+    }
+
     public void addCourse(Course course){
         this.coursesTaken.add(course);
     }

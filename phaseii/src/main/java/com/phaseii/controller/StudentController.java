@@ -2,6 +2,7 @@ package com.phaseii.controller;
 
 import com.phaseii.dto.CourseDto;
 import com.phaseii.dto.StudentDto;
+import com.phaseii.dto.StudentV2Dto;
 import com.phaseii.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class StudentController {
 
     StudentService studentService;
@@ -55,7 +57,7 @@ public class StudentController {
     }
 
     @GetMapping(value = "/api/v2/students")
-    public ResponseEntity<List<StudentDto>> findStudentByMajor(@RequestParam String major){
+    public ResponseEntity<List<StudentV2Dto>> findStudentByMajor(@RequestParam String major){
         var students = studentService.getStudentsByMajor(major);
         return ResponseEntity.ok().body(students);
     }

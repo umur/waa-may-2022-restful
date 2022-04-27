@@ -6,12 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="miu" />
+        <module name="phasei" />
         <module name="phaseii" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="miu" target="17" />
+      <module name="phasei" target="17" />
       <module name="phaseii" target="17" />
       <module name="waa-may-2022-restful-shree" target="1.5" />
     </bytecodeTargetLevel>
@@ -19,6 +20,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="miu" options="-parameters" />
+      <module name="phasei" options="-parameters --add-modules java.base" />
       <module name="phaseii" options="-parameters --add-modules java.base" />
     </option>
   </component>

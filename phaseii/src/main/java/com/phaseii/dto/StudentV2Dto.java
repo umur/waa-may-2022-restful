@@ -1,6 +1,5 @@
 package com.phaseii.dto;
 
-import com.phaseii.domain.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,7 +7,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class StudentDto {
+public class StudentV2Dto {
 
     private Long id;
 
@@ -20,7 +19,7 @@ public class StudentDto {
 
     private String major;
 
+    private double gpa;
+
     private List<CourseDto> coursesTaken;
-
-
 }
