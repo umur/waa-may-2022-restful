@@ -6,6 +6,7 @@ import com.example.lab1.domain.Course;
 import com.example.lab1.domain.Student;
 import com.example.lab1.dtos.StudentDTOV1;
 import com.example.lab1.service.StudentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +19,26 @@ import java.util.stream.Collectors;
 public class StudentController {
 
     private final StudentService studentService;
+    private final ModelMapper modelMapper;
 
-    public StudentController(StudentService studentService){
+    public StudentController(StudentService studentService,
+                             ModelMapper modelMapper){
         this.studentService = studentService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
     public ResponseEntity<?> getStudents(@RequestParam Map<String, String> queryParams){
+
         Optional<Collection<Student>> students = Optional.ofNullable(studentService.getStudents());
         if(students.isEmpty())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Collection<StudentDTOV1> studentDTOV1s;
-        studentDTOV1s = students.get().stream().map(StudentAdapter::getStudentV1).collect(Collectors.toList());
+        studentDTOV1s = students
+                .get()
+                .stream()
+                .map(student -> modelMapper.map(student, StudentDTOV1.class))
+                .collect(Collectors.toList());
         return new ResponseEntity<>(studentDTOV1s, HttpStatus.OK);
     }
 
@@ -37,14 +46,14 @@ public class StudentController {
     public ResponseEntity<?> getStudent(@PathVariable long id){
         Optional<Student> student = Optional.ofNullable(studentService.getStudent(id));
         if(student.isPresent())
-            return new ResponseEntity<>(StudentAdapter.getStudentV1(student.get()), HttpStatus.OK);
+            return new ResponseEntity<>(modelMapper.map(student.get(), StudentDTOV1.class), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
     public ResponseEntity<?> createStudent(@RequestBody Student student){
         return new ResponseEntity<>(
-                StudentAdapter.getStudentV1(studentService.createStudent(student)),
+                modelMapper.map(studentService.createStudent(student), StudentDTOV1.class),
                 HttpStatus.CREATED);
     }
 
@@ -65,7 +74,7 @@ public class StudentController {
         Optional<Student> student = Optional.ofNullable(studentService.getStudent(id));
         if(student.isPresent())
             return new ResponseEntity<>(
-                    StudentAdapter.getStudentV1(studentService.addCourse(id, course)),
+                    modelMapper.map(studentService.addCourse(id, course), StudentDTOV1.class),
                     HttpStatus.CREATED);
         return new ResponseEntity<>(new CustomError("Student Not Found"), HttpStatus.NOT_FOUND);
     }
