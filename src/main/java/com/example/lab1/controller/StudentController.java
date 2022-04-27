@@ -28,8 +28,8 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getStudents(@RequestParam Map<String, String> queryParams){
-
+    public ResponseEntity<?> getStudents(@RequestHeader Map<String, String> headers,
+                                         @RequestParam Map<String, String> queryParams){
         Optional<Collection<Student>> students = Optional.ofNullable(studentService.getStudents());
         if(students.isEmpty())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
