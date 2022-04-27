@@ -29,6 +29,7 @@ public class StudentRepository {
     public void delete(Long id) {
         students.stream()
                 .filter(student -> Objects.equals(student.getId(), id))
+                .collect(Collectors.toList())
                 .forEach(students::remove);
     }
 
