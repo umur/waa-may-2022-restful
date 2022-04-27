@@ -1,5 +1,6 @@
 package com.lab1.lab1.controller;
 
+import com.lab1.lab1.model.Course;
 import com.lab1.lab1.model.Student;
 import com.lab1.lab1.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class StudentController {
     @GetMapping(value = "api/v2/students/{major}")
     public List<Student> getStudentsByMajor(@PathVariable String major) {
         return studentService.getStudentsByMajor(major);
+    }
+
+    @GetMapping(value = "api/v2/students/{id}/courses")
+    public List<Course> getCoursesByStudentId(@PathVariable int id) {
+        return studentService.getCoursesByStudentId(id);
     }
 
 //    @PutMapping("/{id}")

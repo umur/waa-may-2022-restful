@@ -56,4 +56,12 @@ public class StudentRepo {
                 .filter( s -> s.getMajor() == major)
                 .collect(Collectors.toList());
     }
+
+    public List<Course> getCoursesByStudentId(int id) {
+        return students.stream()
+                .filter( s -> s.getId() == id)
+                .findFirst().orElse(null).getCoursesTaken();
+
+    }
+
 }

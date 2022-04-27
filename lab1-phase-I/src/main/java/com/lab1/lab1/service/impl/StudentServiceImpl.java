@@ -1,5 +1,6 @@
 package com.lab1.lab1.service.impl;
 
+import com.lab1.lab1.model.Course;
 import com.lab1.lab1.model.Student;
 import com.lab1.lab1.repository.StudentRepo;
 import com.lab1.lab1.service.StudentService;
@@ -34,5 +35,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getStudentsByMajor(String major) {
         return studentRepo.getStudentsByMajor(major);
+    }
+
+    @Override
+    public  List<Course> getCoursesByStudentId(int id) {
+        return studentRepo.getCoursesByStudentId(id);
     }
 }
