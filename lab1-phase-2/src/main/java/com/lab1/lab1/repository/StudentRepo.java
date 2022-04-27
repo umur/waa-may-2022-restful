@@ -1,11 +1,9 @@
 package com.lab1.lab1.repository;
 
+import com.lab1.lab1.dto.CourseDto;
 import com.lab1.lab1.model.Course;
 import com.lab1.lab1.model.Student;
 import com.lab1.lab1.service.CourseService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,6 +18,17 @@ public class StudentRepo {
 
     public StudentRepo(CourseService courseService) {
         this.courseService=courseService;
+        List<Course> result = new ArrayList<Course>();
+        List<CourseDto> entityList = courseService.getAll();
+        entityList.forEach(dto->{
+            //convert
+            Course c = new Course();
+            c.setId(dto.getId());
+            c.setName(dto.getName());
+            c.setCode(dto.getCode());
+
+            result.add(c);
+        });
         students =  new ArrayList<>();
         var s = new Student();
         s.setId(1);
@@ -28,7 +37,7 @@ public class StudentRepo {
         s.setEmail("meresa27@gmail.com");
         s.setMajor("Compro");
 
-        s.setCoursesTaken(courseService.getAll());
+        s.setCoursesTaken(result);
         students.add(s);
     }
 

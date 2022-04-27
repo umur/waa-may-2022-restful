@@ -4,9 +4,11 @@ import com.lab1.lab1.model.Course;
 import com.lab1.lab1.repository.CourseRepo;
 import com.lab1.lab1.service.CourseService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 @AllArgsConstructor
+@Service
 public class CourseServiceImpl implements CourseService {
     private final CourseRepo courseRepo;
     @Override

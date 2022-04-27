@@ -4,13 +4,17 @@ import com.lab1.lab1.model.Course;
 import com.lab1.lab1.model.Student;
 import com.lab1.lab1.repository.StudentRepo;
 import com.lab1.lab1.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
-    @Autowired
-    private static StudentRepo studentRepo;
+
+    private final StudentRepo studentRepo;
 
     @Override
     public void save(Student s) {

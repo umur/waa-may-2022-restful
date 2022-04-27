@@ -1,8 +1,10 @@
 package com.lab1.lab1.service;
 
 import com.lab1.lab1.model.Course;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface CourseService {
 
