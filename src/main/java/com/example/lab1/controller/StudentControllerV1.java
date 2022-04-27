@@ -3,7 +3,7 @@ package com.example.lab1.controller;
 import com.example.lab1.customError.CustomError;
 import com.example.lab1.domain.Course;
 import com.example.lab1.domain.Student;
-import com.example.lab1.dtos.StudentDTOV1;
+import com.example.lab1.dtos.StudentDTO;
 import com.example.lab1.service.impl.StudentServiceImplV1;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +22,13 @@ public class StudentControllerV1 {
     @GetMapping
     public ResponseEntity<?> getStudents(@RequestHeader Map<String, String> headers,
                                          @RequestParam Map<String, String> queryParams){
-        Optional<Collection<StudentDTOV1>> students = Optional.ofNullable(studentService.getStudents());
+        Optional<Collection<StudentDTO>> students = Optional.ofNullable(studentService.getStudents());
         return new ResponseEntity<>(students.get(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getStudent(@PathVariable long id){
-        Optional<StudentDTOV1> student = Optional.ofNullable(studentService.getStudent(id));
+        Optional<StudentDTO> student = Optional.ofNullable(studentService.getStudent(id));
         if(student.isPresent())
             return new ResponseEntity<>(student.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -54,7 +54,7 @@ public class StudentControllerV1 {
 
     @PostMapping("/{id}/courses")
     public ResponseEntity<?> addCourse(@PathVariable long id, @RequestBody Course course){
-        Optional<StudentDTOV1> student = Optional.ofNullable(studentService.getStudent(id));
+        Optional<StudentDTO> student = Optional.ofNullable(studentService.getStudent(id));
         if(student.isPresent())
             return new ResponseEntity<>(studentService.addCourse(id, course),
                                         HttpStatus.CREATED);

@@ -2,7 +2,7 @@ package com.example.lab1.service.impl;
 
 import com.example.lab1.domain.Course;
 import com.example.lab1.domain.Student;
-import com.example.lab1.dtos.StudentDTOV1;
+import com.example.lab1.dtos.StudentDTO;
 import com.example.lab1.dtos.StudentDTOV2;
 import com.example.lab1.repository.StudentRepository;
 import com.example.lab1.service.StudentService;
@@ -26,7 +26,7 @@ public class StudentServiceImplV2 implements StudentService {
 
     }
 
-    public Collection<StudentDTOV1> getStudents(){
+    public Collection<StudentDTO> getStudents(){
         return studentRepository
                 .getStudents()
                 .stream()
@@ -34,12 +34,12 @@ public class StudentServiceImplV2 implements StudentService {
                 .collect(Collectors.toList());
     }
 
-    public StudentDTOV1 getStudent(long id){
+    public StudentDTO getStudent(long id){
         return modelMapper.map(studentRepository.getStudent(id),
                                 StudentDTOV2.class);
     }
 
-    public StudentDTOV1 createStudent(Student student) {
+    public StudentDTO createStudent(Student student) {
 
         return modelMapper.map(studentRepository.createStudent(student),
                                 StudentDTOV2.class);
@@ -53,13 +53,13 @@ public class StudentServiceImplV2 implements StudentService {
         studentRepository.deleteStudent(id);
     }
 
-    public StudentDTOV1 addCourse(long id, Course course) {
+    public StudentDTO addCourse(long id, Course course) {
         Optional<Student> student = Optional.ofNullable(studentRepository.getStudent(id));
         student.ifPresent(value -> value.addCourse(course));
         return modelMapper.map(student.get(),StudentDTOV2.class);
     }
 
-    public Collection<StudentDTOV1> getStudentsByMajor(String major) {
+    public Collection<StudentDTO> getStudentsByMajor(String major) {
         return studentRepository
                         .getStudentsByMajor(major)
                         .stream()
