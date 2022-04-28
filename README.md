@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Lab 1 - RestFUL Web Services
 
@@ -76,3 +77,6 @@ Before implementation, refer to the ‘Useful GIT Videos’ section.
 * Pull Request
 	* https://www.youtube.com/watch?v=For9VtrQx58
 
+=======
+# waa-may-2022-restful
+>>>>>>> 2b6ef38ce2bdbb816314a848799781e8f8fde66e
