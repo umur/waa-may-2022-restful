@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.domain.Course;
 import com.example.demo.domain.Student;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +37,22 @@ public class StudentRepo {
 
     public void delete(int id){
         students =  new ArrayList<Student>(students.stream().filter(item->item.getId()!=id).collect(Collectors.toList()));
+    }
+    public List<Student> getAllV2(String major){
+        if(major!="") {
+            return students
+                .stream()
+                .filter(item->item.getMajor().toLowerCase().contains(major.toLowerCase()))
+                .collect(Collectors.toList());
+        }
+        return students;
+    }
+    public List<Course> getCourse(int id){
+        List<Student> result = students
+                .stream()
+                .filter(item->item.getId()==id)
+                .collect(Collectors.toList());
+
+        return result.get(0).getCourseTaken();
     }
 }

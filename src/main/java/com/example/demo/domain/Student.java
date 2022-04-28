@@ -18,4 +18,5 @@ public class Student {
     private String email;
     private String major;
     private List<Course> courseTaken;
+    private double gpa;
 }

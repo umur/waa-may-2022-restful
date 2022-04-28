@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.domain.Course;
 import com.example.demo.domain.Student;
 import com.example.demo.repository.StudentRepo;
 import com.example.demo.service.StudentService;
@@ -37,5 +38,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void delete(int id){
          studentRepo.delete(id);
+    }
+
+    @Override
+    public List<Student> getAllV2(String major){
+        return studentRepo.getAllV2(major);
+    }
+
+    @Override
+    public List<Course> getCourseTaken(int id){
+        return studentRepo.getCourse(id);
     }
 }
