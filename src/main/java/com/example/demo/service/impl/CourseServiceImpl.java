@@ -45,4 +45,8 @@ public class CourseServiceImpl implements CourseService {
         c.setName(cou.getName());
         return c;
     }
+    @Override
+    public Course getByID(int id){
+        return courseRepo.getByID(id);
+    }
 }

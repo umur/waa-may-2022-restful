@@ -55,4 +55,8 @@ public class StudentRepo {
 
         return result.get(0).getCourseTaken();
     }
+    public Student getByID(int id){
+        List<Student> result = students.stream().filter(item->item.getId()==id).collect(Collectors.toList());
+        return result.get(0);
+    }
 }

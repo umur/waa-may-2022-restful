@@ -34,4 +34,9 @@ public class CourseRepo {
     public void delete(int id){
         courses =  new ArrayList<Course>(courses.stream().filter(item->item.getId()!=id).collect(Collectors.toList()));
     }
+    public Course getByID(int id){
+        List<Course> result = courses.stream().filter(item->item.getId()==id).collect(Collectors.toList());
+        return result.get(0);
+    }
+
 }

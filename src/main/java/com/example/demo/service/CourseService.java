@@ -19,4 +19,6 @@ public interface CourseService {
     public void delete(int id);
 
     public Course courseFromCourseDto(CourseDto cou);
+
+    public Course getByID(int id);
 }

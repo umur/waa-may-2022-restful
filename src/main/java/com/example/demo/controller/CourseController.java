@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/courses")
+@CrossOrigin(origins = "*")
 public class CourseController {
     @Autowired
     private CourseService courseService;
@@ -21,7 +22,7 @@ public class CourseController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Course> getByID(@PathVariable int id ) {
-        return ResponseEntity.status(200).body(null);
+        return ResponseEntity.status(200).body(courseService.getByID(id));
     }
 
     @PostMapping

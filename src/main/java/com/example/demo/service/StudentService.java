@@ -22,4 +22,6 @@ public interface StudentService {
     public List<Course> getCourseTaken(int id);
 
     public Student studentFromDto(StudentDto stu);
+
+    public Student getByID(int id);
 }

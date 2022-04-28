@@ -11,28 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/api/v1/students")
+    @GetMapping("/v1/students")
     public ResponseEntity<List<Student>> getAll() {
         return ResponseEntity.status(200).body(studentService.getAll());
     }
-    @GetMapping("/api/v2/students")
+    @GetMapping("/v2/students")
     public ResponseEntity<List<Student>> getAllV2(@RequestParam String major) {
         return ResponseEntity.status(200).body(studentService.getAllV2(major));
     }
-    @GetMapping("/api/v1/students/{id}/courses")
+    @GetMapping("/v1/students/{id}/courses")
     public ResponseEntity<List<Course>> getCourseByStudentID(@PathVariable int id) {
         return ResponseEntity.status(200).body(studentService.getCourseTaken(id));
     }
-    @GetMapping("/api/v1/students/{id}")
+    @GetMapping("/v1/students/{id}")
     public ResponseEntity<Student> getByID(@PathVariable int id ) {
-        return ResponseEntity.status(200).body(null);
+        return ResponseEntity.status(200).body(studentService.getByID(id));
     }
 
-    @PostMapping("/api/v1/students")
+    @PostMapping("/v1/students")
     public ResponseEntity<String> save(@RequestBody StudentDto stu ) {
         Boolean result = studentService.save(stu);
         if(result==true){
@@ -41,12 +43,12 @@ public class StudentController {
        return ResponseEntity.status(409).body("Already exist");
     }
 
-    @PutMapping("/api/v1/students/{id}")
+    @PutMapping("/v1/students/{id}")
     public ResponseEntity<List<Student>> update(@RequestBody StudentDto stu ,@PathVariable int id) {
         List<Student> result = studentService.update(stu,id);
         return ResponseEntity.status(200).body(result);
     }
-    @DeleteMapping("/api/v1/students/{id}")
+    @DeleteMapping("/v1/students/{id}")
     public ResponseEntity<String> delete(@PathVariable int id) {
         studentService.delete(id);
         return ResponseEntity.status(200).body("Success");

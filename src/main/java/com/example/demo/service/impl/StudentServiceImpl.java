@@ -65,4 +65,8 @@ public class StudentServiceImpl implements StudentService {
         s.setMajor(stu.getMajor());
         return s;
     }
+    @Override
+    public Student getByID(int id){
+        return studentRepo.getByID(id);
+    }
 }
