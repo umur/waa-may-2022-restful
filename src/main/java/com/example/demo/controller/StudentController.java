@@ -23,7 +23,7 @@ public class StudentController {
     public ResponseEntity<List<Student>> getAllV2(@RequestParam String major) {
         return ResponseEntity.status(200).body(studentService.getAllV2(major));
     }
-    @GetMapping("/api/v2/students/{id}/courses")
+    @GetMapping("/api/v1/students/{id}/courses")
     public ResponseEntity<List<Course>> getCourseByStudentID(@PathVariable int id) {
         return ResponseEntity.status(200).body(studentService.getCourseTaken(id));
     }
