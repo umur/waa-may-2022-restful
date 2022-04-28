@@ -1,10 +1,12 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.CourseDto;
 import com.example.demo.entity.Course;
 import com.example.demo.repo.CourseRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,7 +20,11 @@ public class CourseServiceImp implements CourseService {
 //    }
 
     @Override
-    public void save(Course c) {
+    public void save(CourseDto dto) {
+        Course c= new Course();
+        c.setCode(dto.getCode());
+        c.setName(dto.getName());
+        c.setId(dto.getId());
         cRepo.save(c);
     }
 
@@ -28,17 +34,34 @@ public class CourseServiceImp implements CourseService {
     }
 
     @Override
-    public List<Course> getAll() {
-        return cRepo.getAll();
+    public List<CourseDto> getAll() {
+        var courseList=cRepo.getAll();
+        var result= new ArrayList<CourseDto>();
+        courseList.forEach(c->{
+            CourseDto dto= new CourseDto();
+            dto.setCode(c.getCode());
+            dto.setName(c.getName());
+            dto.setId(c.getId());
+        });
+        return result;
     }
 
     @Override
-    public Course getById(int id) {
-        return cRepo.getById(id);
+    public CourseDto getById(int id) {
+        Course c= cRepo.getById(id);
+        CourseDto dto= new CourseDto();
+        dto.setCode(c.getCode());
+        dto.setName(c.getName());
+        dto.setId(c.getId());
+        return dto;
     }
 
     @Override
-    public void update(int id, Course c) {
-        cRepo.update(id,c);
+    public void update(int id, CourseDto c) {
+        Course newCourse= new Course();
+        newCourse.setCode(c.getCode());
+        newCourse.setId(c.getId());
+        newCourse.setName(c.getName());
+        cRepo.update(id,newCourse);
     }
 }

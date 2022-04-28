@@ -1,16 +1,17 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.CourseDto;
 import com.example.demo.entity.Course;
 
 import java.util.List;
 
 public interface CourseService {
-    void save(Course c);
+    void save(CourseDto c);
 
     void delete(int id);
 
-    List<Course> getAll();
+    List<CourseDto> getAll();
 
-    Course getById(int id);
-    void update(int id, Course c);
+    CourseDto getById(int id);
+    void update(int id, CourseDto c);
 }

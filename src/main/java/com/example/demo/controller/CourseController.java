@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CourseDto;
 import com.example.demo.entity.Course;
 import com.example.demo.service.CourseService;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +19,16 @@ public class CourseController {
     }
 
     @PostMapping
-    public void save( @RequestBody Course c){
+    public void save( @RequestBody CourseDto c){
         courseService.save(c);
     }
 
     @GetMapping
-    public List<Course> getAll() {
+    public List<CourseDto> getAll() {
         return courseService.getAll();
     }
     @GetMapping("/{id}")
-    public ResponseEntity< Course> getById(@PathVariable int id) {
+    public ResponseEntity<CourseDto> getById(@PathVariable int id) {
         return ResponseEntity.ok( courseService.getById(id));
     }
 
@@ -37,7 +38,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable int id, @RequestBody Course c){
+    public void update(@PathVariable int id, @RequestBody CourseDto c){
         courseService.update(id,c);
     }
 

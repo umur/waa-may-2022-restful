@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.StudentDto;
 import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -14,17 +15,17 @@ import java.util.List;
 public class StudentController {
     private final StudentService studentService;
     @PostMapping
-    public void save(@RequestBody Student s){
+    public void save(@RequestBody StudentDto s){
         studentService.save(s);
     }
 
     @GetMapping
-    public List<Student> getAll(){
+    public List<StudentDto> getAll(){
         return studentService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getById(@PathVariable int id){
+    public ResponseEntity<StudentDto> getById(@PathVariable int id){
         return ResponseEntity.ok(studentService.getById(id));
     }
 
@@ -34,7 +35,7 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable int id, @RequestBody Student s){
+    public void update(@PathVariable int id, @RequestBody StudentDto s){
         studentService.update(id,s);
     }
 

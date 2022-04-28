@@ -8,13 +8,8 @@ import java.util.List;
 
 @Repository
 public class CourseRepo {
-    private static List<Course> courses;
+    private  List<Course> courses=new ArrayList<>();
 
-    static {
-        courses = new ArrayList<>();
-        Course c= new Course(1,"cs","cs101");
-        courses.add(c);
-    }
 
     public void save(Course c){
         if(courses.stream().noneMatch(obj->obj.getId()==c.getId())){

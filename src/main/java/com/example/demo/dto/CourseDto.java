@@ -1,12 +1,10 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
-public class Course {
+public class CourseDto {
     private int id;
     private String name;
     private String code;
-
 }
