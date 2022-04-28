@@ -1,4 +1,4 @@
-package com.example.phase1.repository;
+package com.example.phase2.repo;
 
 import com.example.phase1.domain.Course;
 import com.example.phase1.domain.Student;

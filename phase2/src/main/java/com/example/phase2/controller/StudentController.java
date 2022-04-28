@@ -1,4 +1,4 @@
-package com.example.phase1.controller;
+package com.example.phase2.controller;
 
 import com.example.phase1.domain.Course;
 import com.example.phase1.domain.Student;

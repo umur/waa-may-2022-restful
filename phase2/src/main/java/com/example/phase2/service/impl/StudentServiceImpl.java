@@ -1,4 +1,4 @@
-package com.example.phase1.service.impl;
+package com.example.phase2.service.impl;
 
 import com.example.phase1.domain.Course;
 import com.example.phase1.domain.Student;
