@@ -33,11 +33,13 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> update(@RequestBody Student stu ,@PathVariable int id) {
-        return ResponseEntity.status(200).body(null);
+    public ResponseEntity<List<Student>> update(@RequestBody Student stu ,@PathVariable int id) {
+        List<Student> result = studentService.update(stu,id);
+        return ResponseEntity.status(200).body(result);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable int id) {
+        studentService.delete(id);
         return ResponseEntity.status(200).body("Success");
     }
 }

@@ -23,9 +23,18 @@ public class StudentRepo {
         return false;
     }
 
-    public void update(Student s,int id) {
-        students.stream().filter(item->item.getId()==id).map(item->{
-            return s;
-        }).collect(Collectors.toList());
+    public List<Student> update(Student s,int id) {
+        students = new ArrayList<Student>(students.stream().map(item->{
+            if(item.getId()==id){
+                return s;
+            }
+            return item;
+        }).collect(Collectors.toList()));
+        List<Student> updated = students.stream().filter(item->item.getId()==id).collect(Collectors.toList());
+        return updated;
+    }
+
+    public void delete(int id){
+        students =  new ArrayList<Student>(students.stream().filter(item->item.getId()!=id).collect(Collectors.toList()));
     }
 }
