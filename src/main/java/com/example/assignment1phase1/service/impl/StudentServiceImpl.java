@@ -1,13 +1,18 @@
 package com.example.assignment1phase1.service.impl;
 
+import com.example.assignment1phase1.dto.StudentDto;
 import com.example.assignment1phase1.entity.Course;
 import com.example.assignment1phase1.entity.Student;
 import com.example.assignment1phase1.repository.StudentRepo;
 
 import com.example.assignment1phase1.service.StudentService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,19 +25,45 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAll() {
+    public List<StudentDto> getAll() {
+        List<StudentDto> studentDtos = new ArrayList<>();
+        List<Student> students = studentRepo.getAll();
+        StudentDto studentDto = new StudentDto();
+        for (int i = 0; i < students.size(); i++) {
 
-        return studentRepo.getAll();
+            studentDto.setId(students.get(i).getId());
+            studentDto.setFirstName(students.get(i).getFirstName());
+            studentDto.setLastName(students.get(i).getLastName());
+            studentDto.setCoursesTaken(students.get(i).getCoursesTaken());
+            studentDto.setMajor(students.get(i).getMajor());
+            studentDtos.add(studentDto);
+
+        }
+        return studentDtos;
     }
 
     @Override
-    public Student getById(int id) {
-        return studentRepo.getById(id);
+    public StudentDto getById(int id) {
+        StudentDto studentDto = new StudentDto();
+        Student s= studentRepo.getById(id);
+        studentDto.setId(s.getId());
+        studentDto.setFirstName(s.getFirstName());
+        studentDto.setLastName(s.getLastName());
+        studentDto.setCoursesTaken(s.getCoursesTaken());
+        studentDto.setMajor(s.getMajor());
+        return studentDto;
     }
 
 
     @Override
-    public void save(Student s) {
+    public void save(StudentDto studentDto) {
+        Student s=new Student();
+        s.setId(studentDto.getId());
+        s.setFirstName(studentDto.getFirstName());
+        s.setLastName(studentDto.getLastName());
+        s.setCoursesTaken(studentDto.getCoursesTaken());
+        s.setMajor(studentDto.getMajor());
+        s.setCreatedDate(LocalDateTime.now());
         studentRepo.save(s);
 
     }
@@ -43,14 +74,37 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student update(Student s, int id) {
-       return  studentRepo.update(s, id);
+    public StudentDto update(StudentDto studentDto, int id) {
+        Student s=new Student();
+        s.setId(studentDto.getId());
+        s.setFirstName(studentDto.getFirstName());
+        s.setLastName(studentDto.getLastName());
+        s.setCoursesTaken(studentDto.getCoursesTaken());
+        s.setMajor(studentDto.getMajor());
+
+
+         studentRepo.update(s, id);
+         return  studentDto;
+
     }
 
     @Override
-    public List<Student> getStudentsByMajor(String major) {
-        System.out.println("hiiii");
-        return studentRepo.getStudentsByMajor(major);
+    public List<StudentDto> getStudentsByMajor(String major) {
+        List<StudentDto> studentDtos = new ArrayList<>();
+        List<Student> students =  studentRepo.getStudentsByMajor(major);
+        StudentDto studentDto = new StudentDto();
+        for (int i = 0; i < students.size(); i++) {
+
+            studentDto.setId(students.get(i).getId());
+            studentDto.setFirstName(students.get(i).getFirstName());
+            studentDto.setLastName(students.get(i).getLastName());
+            studentDto.setCoursesTaken(students.get(i).getCoursesTaken());
+            studentDto.setMajor(students.get(i).getMajor());
+            studentDtos.add(studentDto);
+
+        }
+        return studentDtos;
+
     }
 
     @Override
