@@ -25,6 +25,14 @@ public class StudentRepository {
         }
     }
 
+    public void update(Student s) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId() == s.getId()) {
+                students.set(i, s);
+            }
+        }
+    }
+
     public void delete(int id) {
         students.stream().filter(l->l.getId() == id)
                 .forEach(l-> students.remove(l));
