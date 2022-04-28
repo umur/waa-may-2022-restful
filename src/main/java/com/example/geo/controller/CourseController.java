@@ -1,13 +1,14 @@
 package com.example.geo.controller;
 
+import com.example.geo.Utilities.ModelMapperUti;
 import com.example.geo.domain.Course;
+import com.example.geo.domain.dto.CourseDto;
 import com.example.geo.service.impl.CourseService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -16,20 +17,12 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    public List<Course> getAll() {
-//        List<Course> list=new ArrayList<>();
-//        Course c=new Course();
-//        c.setId(1);
-//        c.setCode("CS545");
-//        c.setName("WAA");
-//        list.add(c);
-//                return  list;
+    public List<CourseDto> getAll() {
         return courseService.getAll();
-        // return productService.getAll();
-    }
+     }
 
     @GetMapping("/{id}")
-    public Course getById(@PathVariable int id) {
+    public CourseDto getById(@PathVariable int id) {
         return courseService.getById(id);
     }
 
@@ -41,12 +34,12 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Course p, @PathVariable int id) {
+    public void update(@RequestBody CourseDto p, @PathVariable int id) {
         courseService.update(id,p);
     }
 
     @PostMapping
-    public void save(@RequestBody Course p) {
+    public void save(@RequestBody CourseDto p) {
         courseService.save(p);
     }
 
