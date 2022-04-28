@@ -18,7 +18,7 @@ public class CourseRepository {
     }
 
     public List<Course> findAll(){
-        return courses;
+        return courses.stream().filter(course -> course.isDeleted()==false).toList();
     }
 
     public Course save(Course course){

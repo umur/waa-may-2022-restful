@@ -26,7 +26,7 @@ public class StudentRepository {
     }
 
     public List<Student> findAll(){
-        return students;
+        return students.stream().filter(student -> student.isDeleted()==false).toList();
     }
 
     public Student save(Student student){

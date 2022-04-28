@@ -14,7 +14,21 @@ window.onload = function () {
                     option.value = row.id;
                     option.innerHTML = row.code;
                     select.appendChild(option);
-                    addCourseRow(courseTable, row);
+                    addCourseRow(courseTable, row, async (event) => {
+                        await fetch('http://localhost:8080/api/v1/courses/' + row.id, {
+                            method: "DELETE"
+                        }).then((res) => {
+                            if (res.status === 200) {
+                                alert("Deleted successfully");
+                            }
+                        });
+                        loadCourses();
+                    },  (event) => {
+                        document.getElementById('course-name').value= row.name;
+                        document.getElementById('course-code').value = row.code;
+                        document.getElementById('create-course').innerHTML='Update'
+                        document.getElementById('create-course').setAttribute('data-id',row.id);
+                    }, );
                 });
             });
     }
@@ -28,18 +42,26 @@ window.onload = function () {
             .then(data => {
                 studentTable.innerHTML="";
                 data.forEach(row => {
-                    addStudentRow(studentTable, row);
+                    addStudentRow(studentTable, row, (event)=>{
+                        console.log('Here');
+                        console.log(row.id);
+                    });
                 });
             });
     }
 
-    document.getElementById('create-course').onclick = function(event){
+    document.getElementById('create-course').onclick =  async function(event){
         event.preventDefault();
         let data = {
                 "name": document.getElementById('course-name').value,
                 "code": document.getElementById('course-code').value
         }
-        create('http://localhost:8080/api/v1/courses', data);
+        if(this.dataset.id){
+            await create('http://localhost:8080/api/v1/courses/'+this.dataset.id,data,'PUT' );
+            document.getElementById('create-course').innerHTML='Add'
+        } else {
+            await create('http://localhost:8080/api/v1/courses', data,'POST');
+        }
         document.getElementById("course-form").reset();
         loadCourses();
     }
@@ -66,14 +88,26 @@ window.onload = function () {
     loadCourses();
     loadStudents();
 
-    const addCourseRow = (table, data) => {
+    const addCourseRow = (table, data, deleteCallback, updateCallback) => {
         let row = table.insertRow();
         let id = row.insertCell(0);
         let name = row.insertCell(1);
         let code = row.insertCell(2);
+        let action = row.insertCell(3);
         id.innerHTML = data.id;
         name.innerHTML = data.name;
         code.innerHTML = data.code;
+        const deleteCourse = document.createElement("button");
+        const updateCourse = document.createElement("button");
+        deleteCourse.addEventListener("click", deleteCallback);
+        deleteCourse.classList = "btn btn-danger";
+        deleteCourse.innerHTML = 'Delete';
+        action.append(deleteCourse);
+        updateCourse.addEventListener("click", updateCallback);
+        updateCourse.classList = "btn btn-primary";
+        updateCourse.innerHTML = 'Update';
+        action.append(deleteCourse);
+        action.append(updateCourse);
     };
 
     const addStudentRow = (table, data) => {
@@ -93,9 +127,9 @@ window.onload = function () {
     };
 
 
-     function create(url,data) {
+     function create(url,data,method) {
          fetch(url, {
-            method: "POST",
+            method: method,
             headers: {
                 "Content-type": "application/json"
             },
