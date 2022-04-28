@@ -27,6 +27,7 @@ public class CourseRepository {
     public void delete(Long id) {
         courses.stream()
                 .filter(crs -> crs.getId() == id)
+                .collect(Collectors.toList())
                 .forEach(c -> courses.remove(c));
     }
 
