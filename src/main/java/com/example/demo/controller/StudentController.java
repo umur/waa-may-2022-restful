@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Course;
 import com.example.demo.domain.Student;
+import com.example.demo.dto.StudentDto;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class StudentController {
     }
 
     @PostMapping("/api/v1/students")
-    public ResponseEntity<String> save(@RequestBody Student stu ) {
+    public ResponseEntity<String> save(@RequestBody StudentDto stu ) {
         Boolean result = studentService.save(stu);
         if(result==true){
             return ResponseEntity.status(200).body("Success");
@@ -41,7 +42,7 @@ public class StudentController {
     }
 
     @PutMapping("/api/v1/students/{id}")
-    public ResponseEntity<List<Student>> update(@RequestBody Student stu ,@PathVariable int id) {
+    public ResponseEntity<List<Student>> update(@RequestBody StudentDto stu ,@PathVariable int id) {
         List<Student> result = studentService.update(stu,id);
         return ResponseEntity.status(200).body(result);
     }

@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.domain.Course;
+import com.example.demo.dto.CourseDto;
 import com.example.demo.repository.CourseRepo;
 import com.example.demo.repository.StudentRepo;
 import com.example.demo.service.CourseService;
@@ -20,17 +21,28 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void save(Course s) {
-        courseRepo.save(s);
+    public void save(CourseDto c) {
+        Course cou = courseFromCourseDto(c);
+        courseRepo.save(cou);
     }
 
     @Override
-    public List<Course> update(Course s,int id){
-        return courseRepo.update(s,id);
+    public List<Course> update(CourseDto c, int id){
+        Course cou = courseFromCourseDto(c);
+        return courseRepo.update(cou,id);
     }
 
     @Override
     public void delete(int id){
         courseRepo.delete(id);
+    }
+
+    @Override
+    public Course courseFromCourseDto(CourseDto cou) {
+        Course c = new Course();
+        c.setId(cou.getId());
+        c.setCode(cou.getCode());
+        c.setName(cou.getName());
+        return c;
     }
 }

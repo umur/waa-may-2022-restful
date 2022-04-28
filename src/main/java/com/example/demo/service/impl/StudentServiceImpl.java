@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.domain.Course;
 import com.example.demo.domain.Student;
+import com.example.demo.dto.StudentDto;
 import com.example.demo.repository.StudentRepo;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean save(Student s) {
-        return studentRepo.save(s);
+    public boolean save(StudentDto s) {
+        Student stu = studentFromDto(s);
+        return studentRepo.save(stu);
     }
 
     @Override
-    public List<Student> update(Student s,int id){
-        return studentRepo.update(s,id);
+    public List<Student> update(StudentDto s,int id){
+        Student stu = studentFromDto(s);
+        return studentRepo.update(stu,id);
     }
 
     @Override
@@ -48,5 +51,18 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Course> getCourseTaken(int id){
         return studentRepo.getCourse(id);
+    }
+
+    @Override
+    public Student studentFromDto(StudentDto stu){
+        Student s = new Student();
+        s.setId(stu.getId());
+        s.setEmail(stu.getEmail());
+        s.setCourseTaken(stu.getCourseTaken());
+        s.setFirstName(stu.getFirstName());
+        s.setLastName(stu.getLastName());
+        s.setGpa(stu.getGpa());
+        s.setMajor(stu.getMajor());
+        return s;
     }
 }
