@@ -3,7 +3,7 @@ package com.example.lab1.controller;
 import com.example.lab1.domain.Course;
 import com.example.lab1.domain.Student;
 import com.example.lab1.dtos.CourseDTOV1;
-import com.example.lab1.dtos.StudentDTOV1;
+import com.example.lab1.dtos.StudentDTO;
 import com.example.lab1.service.CourseService;
 import com.example.lab1.service.CourseServiceImp;
 import org.springframework.http.HttpStatus;
