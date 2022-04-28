@@ -1,28 +1,27 @@
 package com.example.phase2.service;
-
-import com.example.phase1.domain.Course;
-import com.example.phase1.domain.Student;
-import com.example.phase1.domain.Student2;
+import com.example.phase2.dto.CourseDto;
+import com.example.phase2.dto.StudentDto;
+import com.example.phase2.dto.StudentGpaDto;
 
 import java.util.List;
 
 public interface StudentService {
 
-    List<Student> getAll();
+    List<StudentDto> getAll();
 
-    List<Student2> getAll2();
+    List<StudentGpaDto> getAll2();
 
-    List<Course> getCoursesByStudentId(int id);
+    List<CourseDto> getCoursesByStudentId(int id);
 
-    List<Student2> getStudentByMajor(String major);
+    List<StudentGpaDto> getStudentByMajor(String major);
 
-    void save(Student s);
+    void save(StudentDto s);
 
-    void save2(Student2 s);
-    void update(Student s, int id);
+    void save2(StudentGpaDto s);
+    void update(StudentDto s, int id);
 
     void delete(int id);
 
-    Student getById(int id);
+    StudentDto getById(int id);
 
 }

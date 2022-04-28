@@ -24,10 +24,11 @@ public class StudentRepository {
     }
 
     public List<Course> getCoursesByStudentId(int id) {
-        return null;
-//        return students2.stream().filter(l->l.getId() == id)
-//                .flatMap(l-> l.getCoursesTaken())
-//                .collect(Collectors.toList());
+        var result = students2.stream()
+                .filter(l->l.getId() == id)
+                .findFirst();
+
+        return result.get().getCoursesTaken();
     }
 
     public List<Student2> getStudentByMajor(String major) {

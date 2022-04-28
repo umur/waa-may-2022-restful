@@ -1,10 +1,11 @@
 package com.example.phase2.service.impl;
 
-import com.example.phase1.domain.Course;
-import com.example.phase1.domain.Student;
-import com.example.phase1.domain.Student2;
-import com.example.phase1.repository.StudentRepository;
-import com.example.phase1.service.StudentService;
+import com.example.phase2.dto.CourseDto;
+import com.example.phase2.dto.StudentDto;
+import com.example.phase2.dto.StudentGpaDto;
+import com.example.phase2.entity.Student;
+import com.example.phase2.repo.StudentRepository;
+import com.example.phase2.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,38 +18,38 @@ public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
     @Override
-    public List<Student> getAll() {
+    public List<StudentDto> getAll() {
         return studentRepository.getAll();
     }
 
     @Override
-    public List<Student2> getAll2() {
+    public List<StudentGpaDto> getAll2() {
         return studentRepository.getAll2();
     }
 
     @Override
-    public List<Course> getCoursesByStudentId(int id) {
+    public List<CourseDto> getCoursesByStudentId(int id) {
         return studentRepository.getCoursesByStudentId(id);
     }
 
     @Override
-    public List<Student2> getStudentByMajor(String major) {
+    public List<StudentGpaDto> getStudentByMajor(String major) {
         return studentRepository.getStudentByMajor(major);
     }
 
 
     @Override
-    public void save(Student s) {
+    public void save(StudentDto s) {
         studentRepository.save(s);
     }
 
     @Override
-    public void save2(Student2 s) {
+    public void save2(StudentGpaDto s) {
         studentRepository.save2(s);
     }
 
     @Override
-    public void update(Student s, int id) {
+    public void update(StudentDto s, int id) {
         studentRepository.update(s, id);
     }
 
@@ -58,7 +59,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getById(int id) {
+    public StudentDto getById(int id) {
         return null;
     }
 }
