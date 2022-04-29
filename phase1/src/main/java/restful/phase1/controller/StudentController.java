@@ -3,6 +3,7 @@ package restful.phase1.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restful.phase1.domain.Student;
+import restful.phase1.dto.StudentDTO;
 import restful.phase1.service.StudentService;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class StudentController {
             this.studentService = studentService;
         }
         @PostMapping(value = "/api/v1/student")
-        public void save (@RequestBody Student s){
+        public void save (@RequestBody StudentDTO s){
             studentService.save(s);
         }
 
@@ -27,12 +28,12 @@ public class StudentController {
         }
 
         @GetMapping("/api/v1/student/{id}")
-        public ResponseEntity<Student> getById ( @PathVariable int id){
+        public ResponseEntity<StudentDTO> getById ( @PathVariable int id){
             return ResponseEntity.ok(studentService.getById(id));
         }
 
         @GetMapping("/api/v1/student")
-        public List<Student> getAllStudents () {
+        public List<StudentDTO> getAllStudents () {
             return studentService.getAllStudents();
         }
 
@@ -43,7 +44,7 @@ public class StudentController {
     }
 
     @GetMapping(value = "/api/v2/student/byMajor/{major}")
-    public List<Student>  getStudentByMajor(@PathVariable String major){
+    public List<StudentDTO>  getStudentByMajor(@PathVariable String major){
         return studentService.getStudentsByMajor(major);
     }
 

@@ -3,6 +3,7 @@ package restful.phase1.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restful.phase1.domain.Course;
+import restful.phase1.dto.CourseDTO;
 import restful.phase1.service.CourseService;
 
 import java.util.List;
@@ -17,17 +18,17 @@ public class CourseController {
     }
 
     @PostMapping
-    public void save(@RequestBody Course c) {
+    public void save(@RequestBody CourseDTO c) {
         courseService.save(c);
     }
 
     @GetMapping
-    public List<Course> getAllCourses() {
+    public List<CourseDTO> getAllCourses() {
         return courseService.getAllCourses();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Course> getById(@PathVariable int id) {
+    public ResponseEntity<CourseDTO> getById(@PathVariable int id) {
         return ResponseEntity.ok(courseService.getById(id));
     }
 

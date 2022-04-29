@@ -1,21 +1,22 @@
 package restful.phase1.service;
 
 import restful.phase1.domain.Student;
+import restful.phase1.dto.StudentDTO;
 
 import java.util.List;
 
 public interface StudentService {
-    List<Student> getAllStudents();
+    List<StudentDTO> getAllStudents();
 
-    void save(Student s);
+    void save(StudentDTO s);
 
     void delete(int id);
 
-    Student getById(int id);
+    StudentDTO getById(int id);
 
-    Student getByFirstName(String fname);
+    StudentDTO getByFirstName(String fname);
 
-    List<Student> getStudentsByMajor(String major);
+    List<StudentDTO> getStudentsByMajor(String major);
 
     List<String> getCoursesByStudentId(int id);
 }
