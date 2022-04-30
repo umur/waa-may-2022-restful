@@ -1,4 +1,4 @@
-package edu.miu.phase1.entity;
+package edu.miu.phase2.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
