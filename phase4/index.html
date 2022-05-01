@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script>
+        window.onload=function (){
+
+            let students = [];
+            let student = {
+                id:0,
+                firstName:'',
+                lastName:'',
+                email:'',
+                major:'',
+                coursesTaken:[]
+            }
+
+            populatePage();
+
+            document.getElementById('btnAdd').onclick=function (){
+                addCourse();
+            }
+
+            document.getElementById('btnSaveStudent').onclick=function (){
+                saveStudent();
+            }
+
+            function saveStudent(){
+                student.id=document.getElementById('txtId').value;
+                student.firstName=document.getElementById('txtFirstName').value;
+                student.lastName=document.getElementById('txtLastName').value;
+                student.major=document.getElementById('txtMajor').value;
+
+                fetch("http://localhost:8080/api/v1/students", {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(student)
+                })
+                    .then((res) => {
+
+                        // fetch("http://localhost:3000/myMusics/" + sessionStorage.getItem('username'))
+                        //     .then((res) => res.json())
+                        //     .then((res) => {
+                        //         buildMyMusic(res);
+                        //         playList = [...res];
+                        //     });
+
+                        students=  res.json();
+
+                        buildStudents(students);
+
+                        alert(students[0].id);
+
+                    });
+            }
+
+            function buildStudents(data){
+                let table=document.getElementById('studentList');
+
+                table.innerHTML = '';
+                for (let i = 0; i < data.length; i++) {
+                    let rw = `<tr>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].firstName}</td>
+                            <td>${data[i].lastName}</td>
+                            <td>${data[i].email}</td>
+                            <td>${data[i].major}</td>
+                            <td>
+<!--                                for(let j = 0; j < data[i].coursesTake.length; j++){-->
+<!--                                    <div>data[i].coursesTake[j].name</div>-->
+<!--                                }-->
+sdsdsd
+                            </td>
+
+                        </tr>`
+
+                    table.innerHTML += rw;
+                }
+            }
+
+            function addCourse(){
+                let id = document.getElementById('txtCourseId').value;
+                let name = document.getElementById('txtCourseName').value;
+                let code = document.getElementById('txtCode').value;
+
+                student.coursesTaken.push({id: id, name:name, code:code});
+                buildCourses(student.coursesTaken);
+
+                document.getElementById('txtCourseId').value='';
+                document.getElementById('txtCourseName').value='';
+                document.getElementById('txtCode').value='';
+
+
+            }
+            function populatePage(){
+
+
+            }
+
+            function buildCourses(data){
+                let table=document.getElementById('courseList');
+
+                table.innerHTML = '';
+                for (let i = 0; i < data.length; i++) {
+                    let rw = `<tr>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].code}</td>
+
+                        </tr>`
+
+                    table.innerHTML += rw;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+
+    <div class="container">
+        <h1>Student entry form</h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txtId">ID</label>
+                    <input
+                            type="text"
+                            id="txtId"
+                            name="txtId"
+                    class="form-control form-control-sm">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtFirstName">First Name</label>
+                    <input type="text"
+                           id="txtFirstName"
+                           name="txtFirstName"
+                           class="form-control form-control-sm">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="txtLastName">Last Name</label>
+                    <input type="text"
+                        id="txtLastName"
+                        name="txtLastName"
+                        class="form-control form-control-sm">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtEmail">Email</label>
+                    <input type="email"
+                           id="txtEmail"
+                           name="txtEmail"
+                           class="form-control form-control-sm">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtMajor">Major</label>
+                    <input type="text"
+                           id="txtMajor"
+                           name="txtMajor"
+                           class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <table class="table table-condensed">
+
+                    <thead>
+                        <tr>
+                            <th style="width: 20%">Id</th>
+                            <th style="width: 60%">Course Name</th>
+                            <th style="width: 20%">Code</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="courseList">
+<!--                        <tr>-->
+<!--                            <td>1</td>-->
+<!--                            <td>Web application architecture</td>-->
+<!--                            <td>WAA</td>-->
+<!--                        </tr>-->
+                    </tbody>
+
+                </table>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="txtCourseId">Id</label>
+                            <input type="text"
+                            id="txtCourseId"
+                            name="txtCourseId"
+                            class="form-control form-control-sm">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="txtCourseName">Course Name</label>
+                            <input type="text"
+                                   id="txtCourseName"
+                                   name="txtCourseName"
+                                   class="form-control form-control-sm">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="txtCode">Code</label>
+                            <input type="text"
+                                   id="txtCode"
+                                   name="txtCode"
+                                   class="form-control form-control-sm">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-1" style="vertical-align: center">
+
+                        <div class="form-group">
+                            <label>.</label>
+                            <button class="btn btn-sm btn-info" id="btnAdd">Add</button>
+                        </div>
+
+                    </div>
+
+                </div>
+<!--                // row-->
+            </div>
+<!--            //col-6-->
+        </div>
+<!--        //row-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="float-right">
+                    <button class="btn btn-primary" id="btnSaveStudent">Save Student</button>
+                </div>
+
+
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%">Id</th>
+                            <th style="width: 15%">First Name</th>
+                            <th style="width: 15%">Last Name</th>
+                            <th style="width: 20%">Email</th>
+                            <th style="width: 20%">Major</th>
+                            <th style="width: 20%">Courses Taken</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentList">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>
