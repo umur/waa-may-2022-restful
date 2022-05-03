@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "f2ef55ca-33ed-4b82-9495-add151a899b8",
+		"name": "Lab1 Phase 1 Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"firstName\": \"Hassan1\",\r\n    \"lastName\": \"Ahmed1\",\r\n    \"email\": \"hassan@gmail.com\",\r\n    \"major\": \"CS\",\r\n    \"coursesTaken\": [{\r\n        \"id\": \"10\",\r\n        \"name\": \"EE\",\r\n        \"code\": \"545\"\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Student By Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"firstName\": \"Hassan 4 Updated\",\r\n    \"lastName\": \"Ahmed 4 Updated\",\r\n    \"email\": \"4@gmail.com\",\r\n    \"major\": \"4\",\r\n    \"coursesTaken\": [{\r\n        \"id\": \"11\",\r\n        \"name\": \"UU\",\r\n        \"code\": \"433\"\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/students/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Student",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/students/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Students v2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v2/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v2",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student v2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"firstName\": \"Hassan1\",\r\n    \"lastName\": \"Ahmed1\",\r\n    \"email\": \"hassan@gmail.com\",\r\n    \"major\": \"CS\",\r\n    \"coursesTaken\": [{\r\n        \"id\": \"10\",\r\n        \"name\": \"EE\",\r\n        \"code\": \"545\"\r\n    }],\r\n    \"gpa\": 3.45\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v2/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v2",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Students by Major",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v2/students/EE",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v2",
+						"students",
+						"EE"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
