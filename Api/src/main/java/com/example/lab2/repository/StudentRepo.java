@@ -37,5 +37,8 @@ public List<Student> getStudentsByMajor(String major){
   return studentList.stream().filter(item-> item.major.equals(major)).collect(Collectors.toList());
 }
 
+public List<Course> getCoursesByStudentId(int id){
+    return studentList.stream().filter(item->item.id==id).flatMap(item->item.courseTaken.stream()).collect(Collectors.toList());
+}
 
 }
