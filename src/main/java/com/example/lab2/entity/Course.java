@@ -9,7 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Course {
 
-private int id;
-private String name;
-private String code;
+public int id;
+public String name;
+public String code;
+
 }

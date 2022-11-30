@@ -9,4 +9,6 @@ public interface StudentService {
      Student getStudentById(int id);
 
      void deleteStudentById(int id);
+
+     List<Student> getStudentsByMajor(String major);
 }

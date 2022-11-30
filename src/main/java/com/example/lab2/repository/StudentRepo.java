@@ -33,4 +33,9 @@ public void deleteStudentById(int id){
 studentList.stream().filter(item-> item.id == id).findFirst().get().setDeleted(true);
 }
 
+public List<Student> getStudentsByMajor(String major){
+  return studentList.stream().filter(item-> item.major.equals(major)).collect(Collectors.toList());
+}
+
+
 }
