@@ -1,5 +1,6 @@
 package com.example.lab2.controller;
 
+import com.example.lab2.dto.StudentDto;
 import com.example.lab2.entity.Student;
 import com.example.lab2.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +15,13 @@ public class StudentController {
 
     public final StudentService service;
     @GetMapping
-    public List<Student> getAll(){
+    public List<StudentDto> getAll(){
       return service.getAllStudent();
     }
 
 
     @GetMapping("/{id}")
-    public Student getById(@PathVariable int id){
+    public StudentDto getById(@PathVariable int id){
         return service.getStudentById(id);
     }
 
@@ -30,7 +31,7 @@ public class StudentController {
     }
 
     @GetMapping("/major/{major}")
-    public List<Student> getByMajor(@PathVariable String major){
+    public List<StudentDto> getByMajor(@PathVariable String major){
         return service.getStudentsByMajor(major);
     }
 }
